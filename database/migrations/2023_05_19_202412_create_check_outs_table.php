@@ -14,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('check_outs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->date('attendance')->default(now())->unique();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('attendance')->default(now());
             $table->time('attendance_time')->default(now());
+            $table->unique(['attendance', 'id']);
             $table->timestamps();
         });
     }
