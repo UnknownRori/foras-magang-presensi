@@ -13,7 +13,9 @@ class CheckOutController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.checkout.index', [
+            'checkout' => CheckOut::with('user')->orderBy('attendance', 'desc')->paginate(10),
+        ]);
     }
 
     /**

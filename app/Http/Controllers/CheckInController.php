@@ -13,7 +13,9 @@ class CheckInController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.checkin.index', [
+            'checkin' => CheckIn::with('user')->orderBy('attendance', 'desc')->paginate(10),
+        ]);
     }
 
     /**
