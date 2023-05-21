@@ -3,16 +3,29 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\CheckIn;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Show login form
      */
-    public function __invoke(Request $request)
+    public function view(): View
     {
-        //
+        return view('auth.login');
+    }
+
+    public function post(LoginRequest $request): RedirectResponse
+    {
+        if (Auth::attempt($request->validated()))
+            return redirect()->route('dashboard.main');
+
+        return redirect()->route('login')->with([
+            'type' => 'error',
+            'message' => __('messages.login-failed'),
+        ]);
     }
 }
