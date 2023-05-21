@@ -6,15 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Alert extends Component
+class AutoAlert extends Component
 {
-    public string $type;
     /**
      * Create a new component instance.
      */
-    public function __construct(string $type = "error")
+    public function __construct()
     {
-        $this->type = $type;
+        //
     }
 
     /**
@@ -22,6 +21,6 @@ class Alert extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.shared.alert');
+        return view('components.shared.auto-alert');
     }
 }
