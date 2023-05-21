@@ -12,7 +12,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(User $user): bool
     {
-        return auth()->user()->admin || auth()->user()->id == $user->id;
+        return true;
     }
 
     /**
@@ -24,8 +24,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:4'],
-            'password' => ['required', 'min:4'],
-            'password_confirmation' => ['required', 'confirmed']
+            'old-password' => ['required', 'min:4'],
+            'password' => ['confirmed'],
+            'password_confirmation' => []
         ];
     }
 }
