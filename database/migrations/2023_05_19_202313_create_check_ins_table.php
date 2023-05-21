@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('check_ins', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('attendance')->default(now());
-            $table->time('attendance_time')->default(now());
-            $table->unique(['attendance', 'id']);
+            $table->date('attendance');
+            $table->time('attendance_time');
+            $table->unique(['user_id', 'attendance']);
             $table->timestamps();
         });
     }
