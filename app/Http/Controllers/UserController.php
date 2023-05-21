@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.user.index', [
+            'users' => User::paginate(10),
+        ]);
     }
 
     /**
@@ -19,15 +23,34 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.user.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        if ($validated['password'] != $validated['password_confirmation'])
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Password konfirmasi tidak sama',
+            ]);
+
+        unset($validated['password_confirmation']);
+
+        if (User::create($validated))
+            return redirect()->route('dashboard.users.index')->with([
+                'type' => 'success',
+                'message' => 'User berhasil ditambah',
+            ]);
+
+        return redirect()->back()->with([
+            'type' => 'error',
+            'message' => 'User gagal ditambah',
+        ]);
     }
 
     /**
@@ -57,8 +80,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        if ($user->delete())
+            return redirect()->route('dashboard.users.index')->with([
+                'type' => 'success',
+                'message' => 'User berhasil dihapus'
+            ]);
+
+        return redirect()->route('dashboard.users.index')->with([
+            'type' => 'error',
+            'message' => 'User gagal dihapus'
+        ]);
     }
 }
