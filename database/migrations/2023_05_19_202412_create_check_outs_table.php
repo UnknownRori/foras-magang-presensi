@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->date('attendance')->default(now());
-            $table->time('attendance-time')->default(now());
+            $table->time('attendance_time')->default(now());
             $table->timestamps();
         });
     }
