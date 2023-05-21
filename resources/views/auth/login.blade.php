@@ -9,9 +9,9 @@
                 <x-shared.inputform id="password" type="password" placeholder="Masukan password anda"
                     msg="Password harap di-isi" />
                 @if (session()->has('message'))
-                    <x-alert-label>
+                    <x-shared.alert>
                         {{ session()->get('message') }}
-                    </x-alert-label>
+                    </x-shared.alert>
                 @endif
                 <div>
                     <input type="submit" value="Login"
