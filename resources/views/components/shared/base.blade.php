@@ -10,10 +10,9 @@
 </head>
 
 <body class="h-[94vh]">
-
-    <body>
+    <main class="h-[100%]">
         {{ $slot }}
-    </body>
+    </main>
 </body>
 
 </html>

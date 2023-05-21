@@ -22,10 +22,52 @@
                 @endcan
                 @can('non-admin')
                     <li>
-                        <x-shared.navbar-link :href="route('dashboard.check-in.create')">Check In</x-shared.navbar-link>
+                        {{-- Todo : Refactor this dropdown into shared customizable component --}}
+                        <div class="relative">
+                            <button
+                                class="peer flex min-w-[100px] flex-row items-center gap-2 text-gray-500 hover:text-gray-800">
+                                Presensi Masuk
+                            </button>
+                            <div
+                                class="invisible absolute z-10 w-[100%] rounded-sm border-2 border-gray-100 bg-gray-50 p-2 shadow-sm hover:visible peer-focus:visible">
+                                <ul class="flex flex-col gap-2">
+                                    <li>
+                                        <x-shared.navbar-link href="{{ route('dashboard.check-in.create') }}">
+                                            Presensi
+                                        </x-shared.navbar-link>
+                                    </li>
+                                    <li>
+                                        <x-shared.navbar-link href="{{ route('dashboard.check-in.index') }}">
+                                            Histori
+                                        </x-shared.navbar-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                     <li>
-                        <x-shared.navbar-link :href="route('dashboard.check-out.create')">Check Out</x-shared.navbar-link>
+                        {{-- Todo : Refactor this dropdown into shared customizable component --}}
+                        <div class="relative">
+                            <button
+                                class="peer flex min-w-[100px] flex-row items-center gap-2 text-gray-500 hover:text-gray-800">
+                                Presensi Keluar
+                            </button>
+                            <div
+                                class="invisible absolute z-10 w-[100%] rounded-sm border-2 border-gray-100 bg-gray-50 p-2 shadow-sm hover:visible peer-focus:visible">
+                                <ul class="flex flex-col gap-2">
+                                    <li>
+                                        <x-shared.navbar-link href="{{ route('dashboard.check-out.create') }}">
+                                            Presensi
+                                        </x-shared.navbar-link>
+                                    </li>
+                                    <li>
+                                        <x-shared.navbar-link href="{{ route('dashboard.check-out.index') }}">
+                                            Histori
+                                        </x-shared.navbar-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                 @endcan
             </ul>

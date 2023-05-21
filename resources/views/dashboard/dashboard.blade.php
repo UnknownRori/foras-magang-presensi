@@ -2,6 +2,7 @@
     <x-shared.navbar />
 
     <main class="m-auto w-[95%]">
+        <x-shared.auto-alert />
         <h2 class="text-xl">
             Selamat datang <span class="font-bold">{{ auth()->user()->name }}</span>
         </h2>
