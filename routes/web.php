@@ -23,8 +23,12 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::prefix('auth')->group(function () {
-    Route::get('/login', LoginController::class)->middleware('guest')->name('login');
-    Route::post('/logout', LogoutController::class)->middleware('guest')->name('logout');
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [LoginController::class, 'view'])->name('login');
+        Route::post('/login', [LoginController::class, "post"])->name('post-login');
+    });
+
+    Route::post('/logout', LogoutController::class)->middleware('auth')->name('logout');
 });
 
 Route::prefix('/dashboard')->middleware('auth')->name('dashboard')->group(function () {
