@@ -1,7 +1,15 @@
 <x-shared.base>
     <div class="absolute z-10 flex w-[100%] flex-row-reverse px-6 py-2">
-        <div class="flex flex-row-reverse">
-            <a href="{{ route('login') }}" class="md:text-md flex text-center text-gray-500 hover:text-gray-700 lg:text-lg">Login</a>
+        <div class="relative ml-auto flex flex-row gap-4">
+            @guest
+                <a href="{{ route('login') }}"
+                    class="md:text-md flex text-center text-gray-500 hover:text-gray-700 lg:text-lg">Login</a>
+            @endguest
+            @auth
+                <a href="{{ route('dashboard.main') }}"
+                    class="md:text-md flex text-center text-gray-500 hover:text-gray-700 lg:text-lg">Dashboard</a>
+                <x-shared.profile-menu />
+            @endauth
         </div>
     </div>
 
