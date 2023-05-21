@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CheckOut;
 use App\Http\Requests\StoreCheckOutRequest;
 use App\Http\Requests\UpdateCheckOutRequest;
+use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class CheckOutController extends Controller
 {
@@ -21,17 +25,31 @@ class CheckOutController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('dashboard.checkout.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCheckOutRequest $request)
+    public function store(StoreCheckOutRequest $request): RedirectResponse
     {
-        //
+        try {
+            DB::transaction(function () use ($request) {
+                $request->user()->checkout()->create();
+            });
+        } catch (Exception $e) {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Presensi hanya bisa dilakukan sehari sekali...',
+            ]);
+        }
+
+        return redirect()->route('dashboard.main')->with([
+            'type' => 'success',
+            'message' => 'Berhasil melakukan presensi',
+        ]);
     }
 
     /**
