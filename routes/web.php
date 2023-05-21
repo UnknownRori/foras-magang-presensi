@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\CheckInController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,10 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('/dashboard')->middleware('auth')->name('dashboard.')->group(function () {
     Route::get('/', DashboardController::class)->name('main');
+
+    Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/edit-profile', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::middleware('admin')->group(function () {
         Route::resource('/users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
         Route::resource('/check-in', CheckInController::class)->only('index');
@@ -41,7 +46,6 @@ Route::prefix('/dashboard')->middleware('auth')->name('dashboard.')->group(funct
     });
 
     Route::middleware('non-admin')->group(function () {
-        Route::resource('/users', UserController::class)->only(['edit', 'update']);
         Route::resource('/check-in', CheckInController::class)->only(['store', 'create']);
         Route::resource('/check-out', CheckOutController::class)->only(['store', 'create']);
     });
