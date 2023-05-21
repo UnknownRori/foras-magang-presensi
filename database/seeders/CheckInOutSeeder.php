@@ -18,8 +18,8 @@ class CheckInOutSeeder extends Seeder
         $user = User::factory()->create();
 
         for ($i = 0; $i < 10; $i++) {
-            CheckIn::factory()->for($user)->create(['attendance' => now()->day(-$i)]);
-            CheckOut::factory()->for($user)->create(['attendance' => now()->day(-$i)]);
+            CheckIn::factory()->for($user)->create(['attendance' => now()->day(-$i), 'attendance_time' => now()]);
+            CheckOut::factory()->for($user)->create(['attendance' => now()->day(-$i), 'attendance_time' => now()]);
         }
 
         $checkin = new CheckIn();
