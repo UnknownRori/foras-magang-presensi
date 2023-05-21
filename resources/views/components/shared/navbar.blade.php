@@ -11,7 +11,7 @@
                 </li>
                 @can('admin')
                     <li>
-                        <x-shared.navbar-link :href="route('dashboard.check-in.index')">Users</x-shared.navbar-link>
+                        <x-shared.navbar-link :href="route('dashboard.users.index')">Users</x-shared.navbar-link>
                     </li>
                     <li>
                         <x-shared.navbar-link :href="route('dashboard.check-in.index')">Check In</x-shared.navbar-link>
