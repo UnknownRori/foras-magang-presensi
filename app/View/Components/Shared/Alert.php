@@ -6,18 +6,13 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class InputForm extends Component
+class Alert extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public string $id,
-        public string $type,
-        public string $placeholder,
-        public ?string $value = null,
-        public ?string $msg = null,
-    ) {
+    public function __construct()
+    {
         //
     }
 
@@ -26,6 +21,6 @@ class InputForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.shared.input-form');
+        return view('components.shared.alert');
     }
 }
