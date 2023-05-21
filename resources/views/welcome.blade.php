@@ -1,7 +1,7 @@
-@component('components.shared.base')
+<x-shared.base>
     <div class="absolute z-10 flex w-[100%] flex-row-reverse px-6 py-2">
         <div class="flex flex-row-reverse">
-            <a href="{{ route('login') }}" class="md:text-md flex text-center text-gray-600 lg:text-lg">Login</a>
+            <a href="{{ route('login') }}" class="md:text-md flex text-center text-gray-500 hover:text-gray-700 lg:text-lg">Login</a>
         </div>
     </div>
 
@@ -14,7 +14,7 @@
             class="relative w-[60rem] bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-5xl sm:rounded-lg sm:px-10">
             <div class="mx-auto">
                 <div class="flex justify-center">
-                    <img src="{{ asset('assets/img/foras.png') }}" class="h-48 rounded-full" alt="Tailwind Play" />
+                    <img src="{{ asset('assets/img/foras.webp') }}" class="h-48 rounded-full" alt="Tailwind Play" />
                 </div>
                 <div class="divide-y divide-gray-300/50">
                     <div class="space-y-6 py-8 text-base leading-7 text-gray-600">
@@ -24,4 +24,4 @@
             </div>
         </div>
     </div>
-@endcomponent
+</x-shared.base>
