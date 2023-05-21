@@ -8,17 +8,32 @@ use Illuminate\View\Component;
 
 class InputForm extends Component
 {
+    public string  $id;
+    public string  $type;
+    public string  $placeholder;
+    public ?bool   $isNotRequired = true;
+    public ?string $title = null;
+    public ?string $value = null;
+    public ?string $msg = null;
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $id,
-        public string $type,
-        public string $placeholder,
-        public ?string $value = null,
-        public ?string $msg = null,
+        string $id,
+        string $type,
+        string $placeholder,
+        ?bool $isNotRequired = false,
+        ?string $title = null,
+        ?string $value = null,
+        ?string $msg = null,
     ) {
-        //
+        $this->id = $id;
+        $this->type = $type;
+        $this->placeholder = $placeholder;
+        $this->isNotRequired = $isNotRequired;
+        $this->title = $title;
+        $this->value = $value;
+        $this->msg = $msg;
     }
 
     /**
