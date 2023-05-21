@@ -9,11 +9,7 @@
                     msg="Nama harus di-isi dan lebih dari 4" />
                 <x-shared.inputform id="password" type="password" placeholder="Masukan password anda"
                     msg="Password harap di-isi" />
-                @if (session()->has('message'))
-                    <x-shared.alert>
-                        {{ session()->get('message') }}
-                    </x-shared.alert>
-                @endif
+                <x-shared.auto-alert />
                 <div>
                     <input type="submit" value="Login"
                         class="cursor-pointer rounded-md border-blue-400 bg-blue-500 p-2 text-white hover:bg-blue-700">

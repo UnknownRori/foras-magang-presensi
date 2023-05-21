@@ -11,11 +11,7 @@
                 </span>
                 <form method="post" action="{{ route('dashboard.check-out.store') }}">
                     @csrf
-                    @if (session()->has('message'))
-                        <x-shared.alert>
-                            {{ session()->get('message') }}
-                        </x-shared.alert>
-                    @endif
+                    <x-shared.auto-alert />
                     <div class="text-center">
                         <input type="submit" value="{{ __('messages.attend') }}"
                             class="cursor-pointer rounded-md border-blue-400 bg-blue-500 p-2 text-white hover:bg-blue-700">
