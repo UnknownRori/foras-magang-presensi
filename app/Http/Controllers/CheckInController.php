@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCheckInRequest;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class CheckInController extends Controller
 {
@@ -16,8 +17,13 @@ class CheckInController extends Controller
      */
     public function index(): View
     {
+        if (Gate::allows('admin', auth()->user()))
+            $checkin = CheckIn::with('user')->orderBy('attendance', 'desc')->paginate(10);
+        else if (Gate::allows('non-admin', auth()->user()))
+            $checkin = CheckIn::with('user')->where('user_id', auth()->user()->id)->orderBy('attendance', 'desc')->paginate(10);
+
         return view('dashboard.checkin.index', [
-            'checkin' => CheckIn::with('user')->orderBy('attendance', 'desc')->paginate(10),
+            'checkin' => $checkin,
         ]);
     }
 
@@ -36,7 +42,12 @@ class CheckInController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                $request->user()->checkin()->create();
+                $time = now();
+
+                $request->user()->checkin()->create([
+                    'attendance' => $time,
+                    'attendance_time' => now(),
+                ]);
             });
         } catch (Exception $e) {
             return redirect()->back()->with([

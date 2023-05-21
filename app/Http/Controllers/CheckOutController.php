@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class CheckOutController extends Controller
 {
@@ -17,8 +18,13 @@ class CheckOutController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('admin', auth()->user()))
+            $checkout = CheckOut::with('user')->orderBy('attendance', 'desc')->paginate(10);
+        else if (Gate::allows('non-admin', auth()->user()))
+            $checkout = CheckOut::with('user')->where('user_id', auth()->user()->id)->orderBy('attendance', 'desc')->paginate(10);
+
         return view('dashboard.checkout.index', [
-            'checkout' => CheckOut::with('user')->orderBy('attendance', 'desc')->paginate(10),
+            'checkout' => $checkout,
         ]);
     }
 
@@ -37,7 +43,12 @@ class CheckOutController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                $request->user()->checkout()->create();
+                $time = now();
+
+                $request->user()->checkout()->create([
+                    'attendance' => $time,
+                    'attendance_time' => now(),
+                ]);
             });
         } catch (Exception $e) {
             return redirect()->back()->with([
