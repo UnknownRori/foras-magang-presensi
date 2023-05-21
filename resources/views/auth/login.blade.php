@@ -1,6 +1,7 @@
 <x-shared.base>
     <div class="align-items-center flex min-h-full min-w-full justify-center px-6 py-2">
         <div class="flex w-[32vw] flex-col gap-2 self-center rounded-md border-2 border-gray-300 p-4 shadow-md">
+            <h3 class="text-center text-2xl">Sistem Presensi Foras</h3>
             <img src="{{ asset('assets/img/foras.webp') }}" class="h-32 self-center" alt="Foras">
             <form action="{{ route('post-login') }}" class="flex flex-col gap-4" method="post">
                 @csrf
