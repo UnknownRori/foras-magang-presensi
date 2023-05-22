@@ -9,7 +9,10 @@ Simple web app to track of the attendance for Foras Organization
 > git clone https://github.com/UnknownRori/foras-magang-presensi
 
 # Install Dependency
-> composer install
+> composer install && npm install
+
+# Copy .env
+> cp .env.example .env
 
 # Generate Laravel Key
 > php artisan key:generate
@@ -18,7 +21,7 @@ Simple web app to track of the attendance for Foras Organization
 > php artisan migrate:fresh --seed
 
 # Serve the application locally
-> php artisan serve
+> ./serve.sh
 ```
 
 ## 🚀 Usage
