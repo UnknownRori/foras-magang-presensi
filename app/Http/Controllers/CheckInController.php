@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CheckIn;
 use App\Http\Requests\StoreCheckInRequest;
 use App\Http\Requests\UpdateCheckInRequest;
+use App\Services\CheckInOutService;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -38,17 +39,10 @@ class CheckInController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCheckInRequest $request)
+    public function store(StoreCheckInRequest $request, CheckInOutService $checkInOutService)
     {
         try {
-            DB::transaction(function () use ($request) {
-                $time = now();
-
-                $request->user()->checkin()->create([
-                    'attendance' => $time,
-                    'attendance_time' => now(),
-                ]);
-            });
+            $checkInOutService->checkin($request->user());
         } catch (Exception $e) {
             return redirect()->back()->with([
                 'type' => 'error',

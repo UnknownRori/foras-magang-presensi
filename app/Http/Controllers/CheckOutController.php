@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CheckOut;
 use App\Http\Requests\StoreCheckOutRequest;
 use App\Http\Requests\UpdateCheckOutRequest;
+use App\Services\CheckInOutService;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -39,17 +40,10 @@ class CheckOutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCheckOutRequest $request): RedirectResponse
+    public function store(StoreCheckOutRequest $request, CheckInOutService $checkInOutService): RedirectResponse
     {
         try {
-            DB::transaction(function () use ($request) {
-                $time = now();
-
-                $request->user()->checkout()->create([
-                    'attendance' => $time,
-                    'attendance_time' => now(),
-                ]);
-            });
+            $checkInOutService->checkout($request->user());
         } catch (Exception $e) {
             return redirect()->back()->with([
                 'type' => 'error',
