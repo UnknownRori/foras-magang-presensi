@@ -42,7 +42,7 @@ Route::prefix('/dashboard')->middleware('auth')->name('dashboard.')->group(funct
     Route::resource('/check-out', CheckOutController::class)->only('index');
 
     Route::middleware('admin')->group(function () {
-        Route::resource('/users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
+        Route::resource('/users', UserController::class);
     });
 
     Route::middleware('non-admin')->group(function () {
