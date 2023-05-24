@@ -10,7 +10,7 @@ class CheckIn extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = ['user_id'];
 
     public function user(): BelongsTo
     {
