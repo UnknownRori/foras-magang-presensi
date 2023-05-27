@@ -66,7 +66,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('dashboard.user.edit', [
+            'users' => User::find($id)
+        ]);
     }
 
     /**
@@ -74,7 +76,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Todo : Implement this
     }
 
     /**
