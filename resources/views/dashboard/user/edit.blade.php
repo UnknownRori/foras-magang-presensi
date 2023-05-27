@@ -7,6 +7,7 @@
         <form action="{{ route('dashboard.profile.update') }}" method="post"
             class="flex flex-col gap-4 rounded-md bg-slate-50 p-4 shadow-md">
             @csrf
+            @method('patch')
             <x-shared.inputform :value="auth()->user()->name" id="name" type="text" placeholder="Masukan nama user"
                 msg="Nama harus di-isi dan lebih dari 4" />
             <x-shared.inputform id="old-password" title="Password Lama" type="password"
