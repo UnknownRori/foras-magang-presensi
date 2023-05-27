@@ -39,6 +39,10 @@
                                         class="invisible absolute z-10 w-[100%] rounded-sm border-2 border-gray-100 bg-gray-50 p-2 shadow-sm hover:visible peer-focus:visible">
                                         <ul class="flex flex-col gap-2">
                                             <li>
+                                                <a
+                                                    href="{{ route('dashboard.users.edit', ['user' => $user->id]) }}">Edit</a>
+                                            </li>
+                                            <li>
                                                 <form action="{{ route('dashboard.users.destroy', $user->id) }}"
                                                     method="post">
                                                     @method('delete')
