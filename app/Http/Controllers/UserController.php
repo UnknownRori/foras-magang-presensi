@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -67,16 +69,41 @@ class UserController extends Controller
     public function edit(string $id)
     {
         return view('dashboard.user.edit', [
-            'users' => User::find($id)
+            'user' => User::find($id)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        // Todo : Implement this
+        $validated = $request->validated();
+
+        // Todo : Maybe extract this (?)
+        if (!isset($validated['password'])) {
+            unset($validated['password']);
+        }
+        unset($validated['password_confirmation']);
+        unset($validated['old-password']);
+
+        // Todo : Remove this if `Role` is implemented
+        $validated['admin'] = $validated['role'];
+        unset($validated['role']);
+
+        $user->fill($validated);
+
+        if ($user->save()) {
+            return redirect()->route('dashboard.users.index')->with([
+                'type' => 'success',
+                'message' => 'User berhasil diedit',
+            ]);
+        }
+
+        return redirect()->route('dashboard.users.index')->with([
+            'type' => 'error',
+            'message' => 'User gagal diedit',
+        ]);
     }
 
     /**

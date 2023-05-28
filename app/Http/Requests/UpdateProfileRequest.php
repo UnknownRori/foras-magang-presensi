@@ -2,17 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\RoleEnum;
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
-class UpdateUserRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(User $user): bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -26,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:4'],
-            'role' => [new Enum(RoleEnum::class)],
+            'old-password' => ['required', 'min:4'],
             'password' => ['confirmed'],
             'password_confirmation' => []
         ];
