@@ -37,7 +37,7 @@ Route::prefix('/dashboard')->middleware('auth')->name('dashboard.')->group(funct
     Route::get('/', DashboardController::class)->name('main');
 
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/edit-profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/edit-profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('/check-in', CheckInController::class)->only('index');
     Route::resource('/check-out', CheckOutController::class)->only('index');
 
