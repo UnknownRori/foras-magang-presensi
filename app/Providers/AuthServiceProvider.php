@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -25,11 +26,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('admin', function (User $user) {
-            return $user->admin;
+            return $user->role == RoleEnum::Admin;
         });
 
         Gate::define('non-admin', function (User $user) {
-            return !$user->admin;
+            return $user->role != RoleEnum::Admin;
         });
     }
 }
