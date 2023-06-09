@@ -4,11 +4,11 @@ namespace App\Enums;
 
 use App\Traits\EnumToArray;
 
-enum RoleEnum: int
+enum RoleEnum: string
 {
     use EnumToArray;
 
-    case Asisten = 2;
-    case Admin = 1;
-    case Magang = 0;
+    case Asisten = "Asisten";
+    case Admin = "Admin";
+    case Magang = "Magang";
 }
