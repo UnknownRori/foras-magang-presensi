@@ -8,6 +8,7 @@ enum RoleEnum: int
 {
     use EnumToArray;
 
+    case Asisten = 2;
     case Admin = 1;
-    case NonAdmin = 0;
+    case Magang = 0;
 }
