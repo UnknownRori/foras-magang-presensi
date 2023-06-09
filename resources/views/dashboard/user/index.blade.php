@@ -6,7 +6,13 @@
         <x-shared.auto-alert />
         <div class="flex min-w-full flex-row-reverse">
             <a href="{{ route('dashboard.users.create') }}"
-                class="rounded-md border-2 border-blue-500 bg-blue-600 p-1 text-white">Tambah User</a>
+                class="flex gap-2 rounded-md border-2 border-blue-500 bg-blue-600 p-1 text-white">
+                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+                Tambah User
+            </a>
         </div>
         @if (!empty($users))
             <table class="m-2 w-[100%] rounded-md border-2 border-blue-300 p-2">
