@@ -84,11 +84,9 @@ class UserController extends Controller
         if (!isset($validated['password'])) {
             unset($validated['password']);
         }
+
         unset($validated['password_confirmation']);
         unset($validated['old-password']);
-
-        // Todo : Remove this if `Role` is implemented
-        $validated['admin'] = $validated['role'];
         unset($validated['role']);
 
         $user->fill($validated);
