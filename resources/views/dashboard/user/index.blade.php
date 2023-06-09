@@ -30,7 +30,7 @@
                         <tr class="{{ $loop->even ? 'bg-blue-200' : '' }} border-2 border-blue-300">
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->admin ? 'Admin' : 'Magang' }}</td>
+                            <td>{{ $user->role->name }}</td>
                             <td>{{ $user->created_at }}</td>
                             <td>
                                 {{-- Todo : Refactor this dropdown into shared customizable component --}}
