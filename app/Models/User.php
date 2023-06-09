@@ -49,12 +49,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn (string $plain) => Hash::make($plain),
-        );
-    }
+    // public function password(): Attribute
+    // {
+    //     return Attribute::make(
+    //         set: fn (string $plain) => Hash::make($plain),
+    //     );
+    // }
 
     public function checkout(): HasMany
     {
