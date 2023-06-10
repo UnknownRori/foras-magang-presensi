@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -27,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         App::setLocale('id');
 
         Blade::if('admin', function () {
-            return auth()->user()->admin;
+            return auth()->user()->role == RoleEnum::Admin;
         });
     }
 }
