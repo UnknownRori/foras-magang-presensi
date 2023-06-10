@@ -17,8 +17,9 @@
                     placeholder="Masukan password lama" msg="Password Wajib di-isi" /> --}}
                     {{-- Todo : Make this thing a component --}}
                     <select name="role" id="role">
-                        <option value="1">Admin</option>
-                        <option value="0">NonAdmin</option>
+                        @foreach(\App\Enums\RoleEnum::cases() as $role)
+                            <option value="{{ $role->value }}">{{ $role->name }}</option>
+                        @endforeach
                     </select>
                     <x-shared.inputform id="password" type="password" placeholder="Masukan password baru user"
                         msg="Password minimal 4 karakter" title="Password Baru" :isNotRequired='true' />
@@ -46,8 +47,9 @@
                 @admin
                     {{-- Todo : Make this thing a component --}}
                     <select name="role" id="role">
-                        <option value="1">Admin</option>
-                        <option value="0">NonAdmin</option>
+                        @foreach(\App\Enums\RoleEnum::cases() as $role)
+                            <option value="{{ $role->value }}">{{ $role->name }}</option>
+                        @endforeach
                     </select>
                 @endadmin
                 <x-shared.inputform id="password" type="password" placeholder="Masukan password baru user"
